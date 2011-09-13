@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ACH::VERSION
   s.authors     = ["Artem Kuzko"]
   s.email       = ["a.kuzko@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/akuzko/ach_builder"
   s.summary     = "Ruby tools for building ACH files"
   s.description = "Ruby tools for building ACH (Automated Clearing House) files"
 
