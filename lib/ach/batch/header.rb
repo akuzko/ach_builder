@@ -16,7 +16,9 @@ module ACH
     
     defaults :record_type => 5,
       :service_class_code => 200,
+      :company_note_data  => '',
       :date               => lambda{ Time.now.strftime("%y%m%d") },
-      :settlement_date    => ''
+      :settlement_date    => '',
+      :origin_status_code => ''
   end
 end
