@@ -10,12 +10,6 @@ module ACH
       entries.any?(&:debit?)
     end
     
-    def control
-      field_names = [:entry_count, :entry_hash, :total_debit_amount, :total_credit_amount]
-      control_fields = Hash[*field_names.zip(field_names.map{ |n| send n }).flatten]
-      Control.new control_fields
-    end
-    
     def entry_count
       entries.length
     end
@@ -25,11 +19,11 @@ module ACH
     end
     
     def total_debit_amount
-      entries.select(&:debit?).map(&:amount).compact.inject(&:+)
+      entries.select(&:debit?).map{ |e| e.amount.to_i }.compact.inject(&:+) || 0
     end
     
     def total_credit_amount
-      entries.select(&:credit?).map(&:amount).compact.inject(&:+)
+      entries.select(&:credit?).map{ |e| e.amount.to_i }.compact.inject(&:+) || 0
     end
     
     def to_ach

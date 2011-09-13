@@ -41,6 +41,12 @@ module ACH
       end
     end
     
+    def control
+      klass = self.class::Control
+      fields = klass.fields.select{ |f| respond_to?(f) || attributes[f] }
+      klass.new Hash[*fields.zip(fields.map{ |f| send(f) }).flatten]
+    end
+    
     def fields_for component_or_class
       klass = component_or_class.is_a?(Class) ? component_or_class : "ACH::#{component_or_class.camelize}".constantize
       klass < Component ? attributes : attributes.select{ |k, v| klass.fields.include?(k) && attributes[k] }

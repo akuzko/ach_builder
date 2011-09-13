@@ -2,20 +2,12 @@ module ACH
   class File < Component
     has_many :batches, lambda{ {:batch_number => batches.length + 1} }
     
-    def control
-      
-      field_names = [:batch_count, :block_count, :entry_count, :entry_hash, :total_debit_amount, :total_credit_amount]
-      control_fields = Hash[*field_names.zip(field_names.map{ |n| send n }).flatten]
-      Control.new control_fields
-    end
-    private :control
-    
     def batch_count
       batches.length
     end
     
     def block_count
-      (file_entry_count / 10.0).ceil
+      (entry_count / 10.0).ceil
     end
     
     def entry_count
