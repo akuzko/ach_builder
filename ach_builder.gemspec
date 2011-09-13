@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Ruby tools for building ACH files"
   s.description = "Ruby tools for building ACH (Automated Clearing House) files"
 
-  s.rubyforge_project = "ach_builder"
+  #s.rubyforge_project = "ach_builder"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
