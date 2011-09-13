@@ -36,7 +36,7 @@ module ACH
     
     def write filename
       return false unless valid?
-      File.open(filename, 'w') do |fh|
+      ::File.open(filename, 'w') do |fh|
         fh.write(to_s!)
       end
     end
