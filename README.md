@@ -13,7 +13,7 @@ with similar functionality
 ##Example
     # attributes for records may be passed as parameters, as well as modified in block
     # these attributes will be passed to all inner entities in a cascade way, if required
-    file = File.new(:company_id => '11-11111', :company_name => 'MY COMPANY') do
+    file = ACH::File.new(:company_id => '11-11111', :company_name => 'MY COMPANY') do
       immediate_dest_name 'COMMERCE BANK'
       immediate_origin '123123123'
       immediate_oreigin_name 'MYCOMPANY'
