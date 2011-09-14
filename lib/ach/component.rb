@@ -1,6 +1,7 @@
 module ACH
   class Component
     include Validations
+    include Constants
     
     class UnknownAttribute < ArgumentError
       def initialize field

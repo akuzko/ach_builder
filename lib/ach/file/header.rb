@@ -20,9 +20,9 @@ module ACH
       :date               => lambda{ Time.now.strftime("%y%m%d") },
       :time               => lambda{ Time.now.strftime("%H%M") },
       :file_id_modifier   => 'A',
-      :record_size        => 94,
-      :blocking_factor    => 10,
-      :format_code        => 1,
+      :record_size        => RECORD_SIZE,
+      :blocking_factor    => BLOCKING_FACTOR,
+      :format_code        => FORMAT_CODE,
       :reference_code     => ''
   end
 end

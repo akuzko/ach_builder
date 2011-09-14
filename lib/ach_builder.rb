@@ -3,11 +3,13 @@ require 'active_support/ordered_hash'
 
 require "ach/version"
 
+require 'ach/constants'
 require 'ach/formatter'
 require 'ach/validations'
 require 'ach/component'
 require 'ach/record'
 require 'ach/entry'
+require 'ach/tail'
 require 'ach/batch'
 require 'ach/batch/header'
 require 'ach/batch/control'

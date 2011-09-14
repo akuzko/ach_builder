@@ -22,7 +22,7 @@ module ACH
       :time                   => '<-4',
       :file_id_modifier       => '<-1|upcase',
       :record_size            => '->3',
-      :blocking_factor        => '->20',
+      :blocking_factor        => '->2',
       :format_code            => '<-1',
       :immediate_dest_name    => '<-23',
       :immediate_origin_name  => '<-23',
@@ -46,8 +46,9 @@ module ACH
       :bank_6                 => '<-6',
       :batch_count            => '->6',
       :block_count            => '->6',
-      :entry_count            => '->8',
-      :bank_39                => '<-39'
+      :file_entry_count       => '->8',
+      :bank_39                => '<-39',
+      :nines                  => '<-94'
     }.freeze
     
     RULE_PARSER_REGEX = /^(<-|->)(\d+)(-)?(\|\w+)?$/
@@ -73,7 +74,10 @@ module ACH
       length = width.to_i
       padstr = padmethod == :ljust ? ' ' : pad == '-' ? ' ' : '0'
       transform = transf[1..-1] if transf
-      @@compiled_rules[field_name] = lambda{ |val| val = val.to_s[0..length]; (transform ? val.send(transform) : val).send(padmethod, length, padstr) }
+      @@compiled_rules[field_name] = lambda{ |val|
+        val = val.to_s[0..length]
+        (transform ? val.send(transform) : val).send(padmethod, length, padstr)
+      }
     end
     private :compile_rule
   end

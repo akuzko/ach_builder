@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ACH::Batch do
   before(:each) do
     @batch = ACH::Batch.new
+    @file = ACH.sample_file
   end
   
   it "should create entry with attributes" do
@@ -47,5 +48,14 @@ describe ACH::Batch do
     @batch.entry :amount => 100
     @batch.entry :amount => 100, :transaction_code => 21
     @batch.header.service_class_code.should == 200
+  end
+  
+  it "should have header record with length of 94" do
+    @file.batch(0).header.to_s!.length.should == ACH::Constants::RECORD_SIZE
+  end
+  
+  it "should have control record with length of 94" do
+    @file.batch(0).send(:before_header) # to fill service_class_code value
+    @file.batch(0).control.to_s!.length.should == ACH::Constants::RECORD_SIZE
   end
 end

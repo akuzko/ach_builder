@@ -14,6 +14,7 @@ describe ACH::File do
     @file_with_batch = ACH::File.new(@attributes) do
       batch :entry_class_code => 'WEB'
     end
+    @sample_file = ACH.sample_file
   end
   
   it "should correctly assign attributes" do
@@ -68,6 +69,22 @@ describe ACH::File do
   it "should assign attributes to a batch" do
     batch = @file_with_batch.batch(0)
     batch.attributes.should include(@file_with_batch.attributes)
+  end
+  
+  it "should have correct record count" do
+    @sample_file.record_count.should == 8
+  end
+  
+  it "should have header record with length of 94" do
+    @sample_file.header.to_s!.length.should == ACH::Constants::RECORD_SIZE
+  end
+  
+  it "should have control record with length of 94" do
+    @sample_file.control.to_s!.length.should == ACH::Constants::RECORD_SIZE
+  end
+  
+  it "should have length devisible by 94 (record size)" do
+    (@sample_file.to_s!.gsub("\r\n", '').length % ACH::Constants::RECORD_SIZE).should be_zero
   end
 end
 

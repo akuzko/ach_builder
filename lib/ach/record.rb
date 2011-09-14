@@ -1,6 +1,7 @@
 module ACH
   class Record
     include Validations
+    include Constants
     
     class UnknownField < ArgumentError
       def initialize field, class_name
