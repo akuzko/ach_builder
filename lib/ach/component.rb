@@ -50,7 +50,12 @@ module ACH
     
     def fields_for component_or_class
       klass = component_or_class.is_a?(Class) ? component_or_class : "ACH::#{component_or_class.camelize}".constantize
-      klass < Component ? attributes : attributes.select{ |k, v| klass.fields.include?(k) && attributes[k] }
+      if klass < Component
+        attributes
+      else
+        attrs = attributes.find_all{ |k, v| klass.fields.include?(k) && attributes[k] }
+        Hash[*(attrs.flatten)]
+      end
     end
     
     def self.has_many plural_name, proc_defaults = nil
