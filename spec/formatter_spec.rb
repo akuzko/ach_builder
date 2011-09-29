@@ -4,7 +4,7 @@ describe ACH::Formatter do
   before(:all) do
     module ACH::Formatter
       # redefining RULES FOR new test values
-      RULES = RULES.dup
+      RULES = remove_const(:RULES).dup
       RULES[:ljust_10] = '<-10'
       RULES[:ljust_10_transform] = '<-10|upcase'
       RULES[:rjust_10] = '->10'
