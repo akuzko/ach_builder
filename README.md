@@ -16,7 +16,7 @@ with similar functionality
     file = ACH::File.new(:company_id => '11-11111', :company_name => 'MY COMPANY') do
       immediate_dest_name 'COMMERCE BANK'
       immediate_origin '123123123'
-      immediate_oreigin_name 'MYCOMPANY'
+      immediate_origin_name 'MYCOMPANY'
         
       ['WEB', 'TEL'].each do |code|
         batch(:entry_class_code => code, :company_entry_descr => 'TV-TELCOM') do
